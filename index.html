@@ -11,7 +11,15 @@
       height: 100%;
       background:#000;
       text-align:center;
-    }  
+    }
+    body * {
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
     main {
      position:absolute;
      width:100vmin;
@@ -25,14 +33,10 @@
     p {
       font-family: "Courier", monospace;
       font-size: 24vmin;
+      position:absolute;
       margin: 0;     
       margin-top:38vmin;
     }
-    /*svg {
-      position: relative;
-      margin-left: 0.6%;
-      width: 82%;
-    }*/
     svg {
       position: absolute;
       top:0;
@@ -41,13 +45,26 @@
       height: 100%;
     }
     span.red{
-      color: #f00;
+      color: #fee;    
+      animation: glow .5s infinite alternate;
+    }
+    span.visible{
+      color:green;
+    }
+
+    svg use #red{
+      animation: glow .5s infinite alternate;
+    }
+
+    @keyframes glow {
+      to {
+        text-shadow: 0px 0px 15px rgba(255, 0, 0, 0.75);
+      }
     }
   </style>  
 </head>
 <body>
 <main>
-<p>COMPLE<span class="red">X</span></p>
 <?xml version="1.0"?>
 <svg
   xmlns="http://www.w3.org/2000/svg" 
@@ -239,16 +256,125 @@
 
   <rect filter="url(#turbulence)" width="100" height="100" opacity="0.3" />
   <g transform="translate(3.25,66.67) scale(0.96)">
-    <use x= "0" y="0" xlink:href="#**"/>
-    <use x= "30" y="0" xlink:href="#*"/>
-    <use x= "45" y="0" xlink:href="#*"/>
-    <use x= "60" y="0" xlink:href="#*"/>
-    <use x= "75" y="0" xlink:href="#*"/>
-    <use x= "90" y="0" xlink:href="#*"/>
- <!--    <use x= "10" y="0" xlink:href="#fill" />
-    <use x= "20" y="0" xlink:href="#red" /> -->
+    <use id="cell_CO" x= "0" y="0" xlink:href="#**"/>
+    <use id="cell_M"  x= "30" y="0" xlink:href="#*"/>
+    <use id="cell_P"  x= "45" y="0" xlink:href="#*"/>
+    <use id="cell_L"  x= "60" y="0" xlink:href="#*"/>
+    <use id="cell_E"  x= "75" y="0" xlink:href="#*"/>
+    <use id="cell_X"  x= "90" y="0" xlink:href="#*"/>
   </g>
 </svg>
+
+<p><span id="SI">CO</span><span>M</span><span>P</span><span>L</span><span>E</span><span class="red">X</span></p>
+
 </main>
+
+<script>
+;(function () {
+  var xlinkNS = "http://www.w3.org/1999/xlink"
+  var body = document.body // querySelector("p")
+  var SI = document.querySelector("#SI")
+  var SICell = document.querySelector("#cell_CO")
+  var SIOn = false
+  var current
+    , cell
+
+  body.onmousedown = body.ontouchstart = activateLetter
+
+
+  function activateLetter(event) {
+    var target = event.target
+    if (target.nodeName.toLowerCase() !== "span") {
+      return
+    } 
+
+    if (target !== SI && SIOn) {
+      hideSI()
+      // SIOn may be true if: co is showing, click on SI
+      // Otherwise SIOn is false
+    }
+
+    rolloverLetter(event, true)
+
+    function rolloverLetter(event, isClick) {
+      var target = event.target
+      if (target.nodeName.toLowerCase() !== "span") {
+        return
+      } 
+
+      if (!isClick && target === current) {
+        // We're just moving over the same letter (group)
+        return
+      } else if (cell) {
+        // We've rolled to a new letter (group)
+        hideCell(event, true)
+      }
+
+      showCell(target)
+      
+      function showCell(target) {
+        var text = target.innerHTML
+        var id ="#"+text
+        current = target
+        cell = document.querySelector("#cell_" + text)
+        cell.setAttributeNS(xlinkNS, "xlink:href", id)
+    
+        body.onmousemove = body.ontouchmove = rolloverLetter
+        body.onmouseup = body.ontouchend = hideCell
+      }
+
+      function hideCell(event, isRollover) {
+         if (cell === SICell && isRollover) {
+           hideSI()
+         } else {
+           cell.setAttributeNS(xlinkNS, "xlink:href", "#*")
+         } 
+
+         if (target === SI) {
+          toggleSI(isRollover)
+
+        } else {
+          SIOn = false
+          current = null
+          cell = null
+        }
+
+        body.onmouseup = body.ontouchend = body.onmousemove = body.ontouchmove = null
+      }
+
+      function toggleSI(isRollover) {
+        if (SIOn) {
+          if (isRollover) {
+            // Called immediately after click
+          } else {
+            // Only true if co was already showing, the click was on
+            // SI and it hasn't moved off, and the mouse has just been
+            // released
+            hideSI()
+            current = null
+            cell = null
+          }
+          return
+        } else {
+          SICell.setAttributeNS(xlinkNS, "xlink:href", "#CO")
+
+          if (!isRollover) {
+            SIOn = true
+            cell = false
+          }
+          
+          // console.log("showing")
+          // current = null // so we can toggle this off again
+        }
+      }
+    }
+
+    function hideSI() {
+      SIOn = false
+      SICell.setAttributeNS(xlinkNS, "xlink:href", "#**")
+    }
+  }
+})()
+</script>
 </body>
 </html>
