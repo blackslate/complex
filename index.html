@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <style>
+    html, body {
+      margin:0;
+      padding:0;
+      overflow:hidden;
+      height: 100%;
+      background:#333;
+      text-align:center;
+    }  
+    main {
+     position:absolute;
+     width:100vmin;
+     height:100vmin;
+     left:50%;
+     top:50%;
+     margin-left:-50vmin;
+     margin-top:-50vmin;
+     background-color:#000;
+     color:#fff;
+    }
+    p {
+      font-family: "Courier", monospace;
+      font-size: 24vmin;
+      margin: 0;     
+      margin-top:38vmin;
+    }
+    /*svg {
+      position: relative;
+      margin-left: 0.6%;
+      width: 82%;
+    }*/
+    svg {
+      position: absolute;
+      top:0;
+      left:0;
+      width:100%;
+      height: 100%;
+    }
+    span.red{
+      color: #f00;
+    }
+  </style>  
+</head>
+<body>
+<main>
+<p>COMPLE<span class="red">X</span></p>
+<?xml version="1.0"?>
+<svg
+  xmlns="http://www.w3.org/2000/svg" 
+  width="100"
+  height="100"
+  viewbox="0 0 100 100">
+
+  <defs>
+    <radialGradient
+      id="bump"
+      cx="50%"
+      cy="50%"
+      r="100%"
+      fx="25%"
+      fy="25%">
+      <stop offset="0%" style="stop-color:#ccc" />
+      <stop offset="100%" style="stop-color:#666" />
+    </radialGradient>
+    <radialGradient
+      id="pulse"
+      cx="50%"
+      cy="50%"
+      r="100%"
+      fx="25%"
+      fy="25%">
+      <stop offset="0%" style="stop-color:#f00" />
+      <stop offset="100%" style="stop-color:#900" />
+    </radialGradient>
+    <circle
+      id="line"
+      cx="15"
+      cy="15"
+      r="15"
+      stroke="#666"
+      stroke-width="1"
+      fill="none"
+    />
+    <circle
+      id="fill"
+      cx="15"
+      cy="15"
+      r="15"
+      fill="url(#bump)"
+    />
+    <circle
+      id="red"
+      cx="15"
+      cy="15"
+      r="15"
+      fill="url(#pulse)"
+    />
+    <g
+      id="*"
+      width="80"
+      height="130"
+      transform="scale(0.1)"
+      >
+      <use x=   "0"   y="0" xlink:href="#line"/>
+      <use x=   "0"  y="50" xlink:href="#line"/>
+      <use x=   "0" y="100" xlink:href="#line"/>
+      <use x=  "50"   y="0" xlink:href="#line"/>
+      <use x=  "50"  y="50" xlink:href="#line"/>
+      <use x=  "50" y="100" xlink:href="#line"/>
+    </g>
+    <g
+      id="**"
+      width="200"
+      height="130"
+      transform="scale(0.1)"
+      >
+      <use x=   "0"   y="0" xlink:href="#line"/>
+      <use x=   "0"  y="50" xlink:href="#line"/>
+      <use x=   "0" y="100" xlink:href="#line"/>
+      <use x=  "50"   y="0" xlink:href="#line"/>
+      <use x=  "50"  y="50" xlink:href="#line"/>
+      <use x=  "50" y="100" xlink:href="#line"/>
+      <use x=   "0"   y="0" xlink:href="#line"/>
+      <use x=   "0"  y="50" xlink:href="#line"/>
+      <use x=   "0" y="100" xlink:href="#line"/>
+      <use x=  "50"   y="0" xlink:href="#line"/>
+      <use x=  "50"  y="50" xlink:href="#line"/>
+      <use x=  "50" y="100" xlink:href="#line"/>
+    </g>
+    <g
+      id="CO"
+      width="200"
+      height="130"
+      transform="scale(0.1)"
+      >
+      <use x=   "0"   y="0" xlink:href="#fill"/>
+      <use x=   "0"  y="50" xlink:href="#line"/>
+      <use x=   "0" y="100" xlink:href="#line"/>
+      <use x=  "50"   y="0" xlink:href="#fill"/>
+      <use x=  "50"  y="50" xlink:href="#line"/>
+      <use x=  "50" y="100" xlink:href="#line"/>
+
+      <use x= "150"   y="0" xlink:href="#fill"/>
+      <use x= "150"  y="50" xlink:href="#line"/>
+      <use x= "150" y="100" xlink:href="#fill"/>
+      <use x= "200"   y="0" xlink:href="#line"/>
+      <use x= "200"  y="50" xlink:href="#fill"/>
+      <use x= "200" y="100" xlink:href="#line"/>
+    </g>
+    <g
+      id="M"
+      width="80"
+      height="130"
+      transform="scale(0.1)"
+      >
+      <use x=   "0"   y="0" xlink:href="#fill"/>
+      <use x=   "0"  y="50" xlink:href="#line"/>
+      <use x=   "0" y="100" xlink:href="#fill"/>
+      <use x=  "50"   y="0" xlink:href="#fill"/>
+      <use x=  "50"  y="50" xlink:href="#line"/>
+      <use x=  "50" y="100" xlink:href="#line"/>
+    </g>
+    <g
+      id="P"
+      width="80"
+      height="130"
+      transform="scale(0.1)"
+      >
+      <use x=   "0"   y="0" xlink:href="#fill"/>
+      <use x=   "0"  y="50" xlink:href="#fill"/>
+      <use x=   "0" y="100" xlink:href="#fill"/>
+      <use x=  "50"   y="0" xlink:href="#fill"/>
+      <use x=  "50"  y="50" xlink:href="#line"/>
+      <use x=  "50" y="100" xlink:href="#line"/>
+    </g>
+    <g
+      id="L"
+      width="80"
+      height="130"
+      transform="scale(0.1)"
+      >
+      <use x=   "0"   y="0" xlink:href="#fill"/>
+      <use x=   "0"  y="50" xlink:href="#fill"/>
+      <use x=   "0" y="100" xlink:href="#fill"/>
+      <use x=  "50"   y="0" xlink:href="#line"/>
+      <use x=  "50"  y="50" xlink:href="#line"/>
+      <use x=  "50" y="100" xlink:href="#line"/>
+    </g>
+    <g
+      id="E"
+      width="80"
+      height="130"
+      transform="scale(0.1)"
+      >
+      <use x=   "0"   y="0" xlink:href="#fill"/>
+      <use x=   "0"  y="50" xlink:href="#line"/>
+      <use x=   "0" y="100" xlink:href="#line"/>
+      <use x=  "50"   y="0" xlink:href="#line"/>
+      <use x=  "50"  y="50" xlink:href="#fill"/>
+      <use x=  "50" y="100" xlink:href="#line"/>
+    </g>
+    <g
+      id="X"
+      width="80"
+      height="130"
+      transform="scale(0.1)"
+      >
+      <use x=   "0"   y="0" xlink:href="#red"/>
+      <use x=   "0"  y="50" xlink:href="#red"/>
+      <use x=   "0" y="100" xlink:href="#red"/>
+      <use x=  "50"   y="0" xlink:href="#red"/>
+      <use x=  "50"  y="50" xlink:href="#red"/>
+      <use x=  "50" y="100" xlink:href="#red"/>
+    </g>
+    <filter id="turbulence" filterUnits="userSpaceOnUse" x="0" y="0" width="100" height="100">
+      <feTurbulence
+       type="fractalNoise"
+       baseFrequency="1 1"
+       numOctaves="1"
+       seed="0"
+       stitchTiles="noStitch"
+      in="SourceGraphic">
+       <!--  <animate
+         attributeName="seed"
+         calcMode="linear"
+         values="0;100"
+         begin="0s"
+         dur="1s"
+         repeatCount="indefinite"
+        /> -->
+      </feTurbulence>
+      <feColorMatrix type="saturate" values="0" in="f1">
+    </filter>
+  </defs>
+
+  <rect filter="url(#turbulence)" width="100" height="100" opacity="0.25" />
+  <g transform="translate(3.25,66.67) scale(0.96)">
+    <use x= "0" y="0" xlink:href="#CO"/>
+    <use x= "30" y="0" xlink:href="#M"/>
+    <use x= "45" y="0" xlink:href="#P"/>
+    <use x= "60" y="0" xlink:href="#L"/>
+    <use x= "75" y="0" xlink:href="#E"/>
+    <use x= "90" y="0" xlink:href="#X"/>
+ <!--    <use x= "10" y="0" xlink:href="#fill" />
+    <use x= "20" y="0" xlink:href="#red" /> -->
+  </g>
+</svg>
+</main>
+</body>
+</html>
