@@ -376,7 +376,7 @@
     , cell
     , transforms
 
-  body.onmousedown = body.ontouchstart = checkTarget
+  body.onpointerdown = body.ontouchstart = checkTarget
 
   ;(function initializeDraggableDots() {
     var collection = document.querySelectorAll("svg#cell_CO use")
@@ -438,8 +438,8 @@
             cell.setAttributeNS(xlinkNS, "xlink:href", id)
           }
 
-          body.onmousemove = body.ontouchmove = rolloverLetter
-          body.onmouseup = body.ontouchend = hideCell
+          body.onpointermove = body.ontouchmove = rolloverLetter
+          body.onpointerup = body.ontouchend = hideCell
         }
 
         function hideCell(event, isRollover) {
@@ -458,7 +458,7 @@
             cell = null
           }
 
-          body.onmouseup = body.ontouchend = body.onmousemove = body.ontouchmove = null
+          body.onpointerup = body.ontouchend = body.onpointermove = body.ontouchmove = null
         }
 
         function toggleSI(isRollover) {
@@ -467,7 +467,7 @@
               // Called immediately after click
             } else {
               // Only true if co was already showing, the click was on
-              // SI and it hasn't moved off, and the mouse has just been
+              // SI and it hasn't moved off, and the pointer has just been
               // released
               hideSI()
               current = null
@@ -510,8 +510,8 @@
         , deltaY
 
 
-      body.onmousemove = body.ontouchmove = drag
-      body.onmouseup = body.ontouchend = stopDrag
+      body.onpointermove = body.ontouchmove = drag
+      body.onpointerup = body.ontouchend = stopDrag
 
       function drag(event) {
         deltaX = (event.pageX - clickX) * scale + transformX
@@ -543,7 +543,7 @@
         transform = "translate(" + deltaX + " " + deltaY + ")"
         target.setAttributeNS(null, "transform", transform)
 
-        body.onmousemove = body.ontouchmove = body.onmouseup = body.ontouchend = null
+        body.onpointermove = body.ontouchmove = body.onpointerup = body.ontouchend = null
         dotTransform.x = deltaX
         dotTransform.y = deltaY
 
@@ -839,7 +839,7 @@
         }
 
         function showSolution() {
-          body.onmousedown = body.ontouchstart = body.onmousemove = body.ontouchmove = body.onmouseup = body.ontouchend = null
+          body.onpointerdown = body.ontouchstart = body.onpointermove = body.ontouchmove = body.onpointerup = body.ontouchend = null
 
           document.querySelector(".red").innerHTML = "&nbsp;"
 
