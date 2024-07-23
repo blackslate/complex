@@ -376,7 +376,7 @@
     , cell
     , transforms
 
-  body.onpointerdown = body.ontouchstart = checkTarget
+  body.onpointerdown = checkTarget
 
   ;(function initializeDraggableDots() {
     var collection = document.querySelectorAll("svg#cell_CO use")
@@ -438,8 +438,8 @@
             cell.setAttributeNS(xlinkNS, "xlink:href", id)
           }
 
-          body.onpointermove = body.ontouchmove = rolloverLetter
-          body.onpointerup = body.ontouchend = hideCell
+          body.onpointermove = rolloverLetter
+          body.onpointerup = hideCell
         }
 
         function hideCell(event, isRollover) {
@@ -458,7 +458,7 @@
             cell = null
           }
 
-          body.onpointerup = body.ontouchend = body.onpointermove = body.ontouchmove = null
+          body.onpointerup = body.onpointermove = null
         }
 
         function toggleSI(isRollover) {
@@ -510,8 +510,8 @@
         , deltaY
 
 
-      body.onpointermove = body.ontouchmove = drag
-      body.onpointerup = body.ontouchend = stopDrag
+      body.onpointermove = drag
+      body.onpointerup = stopDrag
 
       function drag(event) {
         deltaX = (event.pageX - clickX) * scale + transformX
@@ -543,7 +543,7 @@
         transform = "translate(" + deltaX + " " + deltaY + ")"
         target.setAttributeNS(null, "transform", transform)
 
-        body.onpointermove = body.ontouchmove = body.onpointerup = body.ontouchend = null
+        body.onpointermove = body.onpointerup = null
         dotTransform.x = deltaX
         dotTransform.y = deltaY
 
@@ -839,7 +839,7 @@
         }
 
         function showSolution() {
-          body.onpointerdown = body.ontouchstart = body.onpointermove = body.ontouchmove = body.onpointerup = body.ontouchend = null
+          body.onpointerdown = body.onpointermove = body.onpointerup = null
 
           document.querySelector(".red").innerHTML = "&nbsp;"
 
