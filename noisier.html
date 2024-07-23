@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Puzzle n° 24</title>
+  <title>Puzzle n° 13</title>
   <style>
     html, body {
       margin:0;
@@ -44,9 +44,6 @@
       left:0;
       width:100%;
       height: 100%;
-    }
-    span {
-      white-space: nowrap;
     }
     span.red{
       color: #fcc;
@@ -109,6 +106,14 @@
       <stop offset="100%" style="stop-color:#900" />
     </radialGradient>
     <circle
+      id="grey"
+      cx="15"
+      cy="15"
+      r="15"
+      fill="#fff"
+      opacity="0.1"
+    />
+   <circle
       id="line"
       cx="15"
       cy="15"
@@ -116,14 +121,6 @@
       stroke="#666"
       stroke-width="1"
       fill="none"
-    />
-    <circle
-      id="fade"
-      cx="15"
-      cy="15"
-      r="15"
-      fill="url(#bump)"
-      opacity="0.8"
     />
     <circle
       id="fill"
@@ -178,10 +175,10 @@
       height="130"
       transform="scale(0.1)"
       >
-      <use x="0"    y="0" xlink:href="#fill"/>
-      <use x="0"   y="50" xlink:href="#line"/>
-      <use x="0"  y="100" xlink:href="#fill"/>
-      <use x="50"   y="0" xlink:href="#fill"/>
+      <use x="0"   y="0" xlink:href="#grey"/>
+      <use x="0"  y="50" xlink:href="#line"/>
+      <use x="0" y="100" xlink:href="#grey"/>
+      <use x="50"   y="0" xlink:href="#grey"/>
       <use x="50"  y="50" xlink:href="#line"/>
       <use x="50" y="100" xlink:href="#line"/>
     </g>
@@ -191,10 +188,10 @@
       height="130"
       transform="scale(0.1)"
       >
-      <use x="0"    y="0" xlink:href="#fill"/>
-      <use x="0"   y="50" xlink:href="#fill"/>
-      <use x="0"  y="100" xlink:href="#fill"/>
-      <use x="50"   y="0" xlink:href="#fill"/>
+      <use x="0"    y="0" xlink:href="#grey"/>
+      <use x="0"   y="50" xlink:href="#grey"/>
+      <use x="0"  y="100" xlink:href="#grey"/>
+      <use x="50"   y="0" xlink:href="#grey"/>
       <use x="50"  y="50" xlink:href="#line"/>
       <use x="50" y="100" xlink:href="#line"/>
     </g>
@@ -204,9 +201,9 @@
       height="130"
       transform="scale(0.1)"
       >
-      <use x="0"    y="0" xlink:href="#fill"/>
-      <use x="0"   y="50" xlink:href="#fill"/>
-      <use x="0"  y="100" xlink:href="#fill"/>
+      <use x="0"    y="0" xlink:href="#grey"/>
+      <use x="0"   y="50" xlink:href="#grey"/>
+      <use x="0"  y="100" xlink:href="#grey"/>
       <use x="50"   y="0" xlink:href="#line"/>
       <use x="50"  y="50" xlink:href="#line"/>
       <use x="50" y="100" xlink:href="#line"/>
@@ -217,11 +214,11 @@
       height="130"
       transform="scale(0.1)"
       >
-      <use x="0"   y="0" xlink:href="#fill"/>
-      <use x="0"  y="50" xlink:href="#line"/>
-      <use x="0" y="100" xlink:href="#line"/>
+      <use x="0"    y="0" xlink:href="#grey"/>
+      <use x="0"   y="50" xlink:href="#line"/>
+      <use x="0"  y="100" xlink:href="#line"/>
       <use x="50"   y="0" xlink:href="#line"/>
-      <use x="50"  y="50" xlink:href="#fill"/>
+      <use x="50"  y="50" xlink:href="#grey"/>
       <use x="50" y="100" xlink:href="#line"/>
     </g>
     <g
@@ -230,17 +227,17 @@
       height="130"
       transform="scale(0.1)"
       >
-      <use x="0"   y="0" xlink:href="#red"/>
-      <use x="0"  y="50" xlink:href="#line"/>
-      <use x="0" y="100" xlink:href="#red"/>
+      <use x="0"    y="0" xlink:href="#red"/>
+      <use x="0"   y="50" xlink:href="#line"/>
+      <use x="0"  y="100" xlink:href="#red"/>
       <use x="50"   y="0" xlink:href="#red"/>
       <use x="50"  y="50" xlink:href="#line"/>
       <use x="50" y="100" xlink:href="#red"/>
     </g>
-    <filter id="turbulence" filterUnits="userSpaceOnUse" x="0" y="0" width="100" height="100">
+    <filter id="fractalNoise" filterUnits="userSpaceOnUse" x="0" y="0" width="100" height="100">
       <feTurbulence
        type="fractalNoise"
-       baseFrequency="1 1"
+       baseFrequency=".1 .1"
        numOctaves="1"
        seed="0"
        stitchTiles="noStitch"
@@ -258,7 +255,7 @@
     </filter>
   </defs>
 
-  <rect filter="url(#turbulence)" width="100" height="100" opacity="0.3" />
+  <rect filter="url(#fractalNoise)" width="100" height="100" opacity="0.2" />
   <g transform="translate(3.25,66.67) scale(0.96)">
     <use              x="0" y="0" xlink:href="#**"/>
     <use id="cell_M"  x="30" y="0" xlink:href="#*"/>
@@ -386,18 +383,25 @@
       dotLUT[ii] = ii
       transforms.push ({ x: 0, y: 0})
       corners.push({ x: dot.x.animVal.value, y: dot.y.animVal.value })
-      cells.push((dot.getAttributeNS(xlinkNS, "href") === "#fill"))
+      cells.push(hrefIsFill(dot))
     }
   })()
 
   function checkTarget(event) {
     event.preventDefault()
     var target = event.target
-    var nodeName = target.nodeName.toLowerCase()
-    if (nodeName === "span") {
-      treatLetterClick(event)
-    } else if (nodeName === "use") {
+
+    if (target.correspondingUseElement) {
+      // This is SVG, and we're in Internet Explorer
+      target = target.correspondingUseElement
       startDrag(event)
+    } else {
+      var nodeName = target.nodeName.toLowerCase()
+      if (nodeName === "span") {
+        treatLetterClick(event)
+      } else if (nodeName === "use") {
+        startDrag(event)
+      }
     }
 
     function treatLetterClick(event) {
@@ -411,7 +415,10 @@
 
       function rolloverLetter(event, isClick) {
         var target = event.target
-        if (target.nodeName.toLowerCase() !== "span") {
+        if (target.correspondingUseElement) {
+          // This is SVG, and we're in Internet Explorer
+          return
+        } else if (target.nodeName.toLowerCase() !== "span") {
           return
         }
 
@@ -429,7 +436,7 @@
           current = target
 
           if (target === SI) {
-            SICell.classList.remove("hidden")
+            SICell.className.baseVal = ""
             cell = SICell
           } else {
             var text = target.innerHTML
@@ -475,7 +482,7 @@
             }
             return
           } else {
-            SICell.classList.remove("hidden")
+            SICell.className.baseVal = ""
 
             if (!isRollover) {
               SIOn = true
@@ -487,12 +494,12 @@
 
       function hideSI() {
         SIOn = false
-        SICell.classList.add("hidden")
+        SICell.className.baseVal = "hidden"
       }
     }
 
     function startDrag(event) {
-      if (target.getAttributeNS(xlinkNS, "href") !== "#fill") {
+      if (!hrefIsFill(target)) {
         return
       }
 
@@ -572,6 +579,15 @@
 
           return cornerIndex
         }
+
+        // function set(svgItem, domain, key, value) {
+        //   if (svgItem.setAttributeNS) {
+        //     svgItem.setAttributeNS(domain, key, value)
+        //   } else {
+        //     // Internet Explorer
+
+        //   }
+        // }
 
         function updateLetters() {
           var si = getLetter(0) + getLetter(6)
@@ -853,7 +869,11 @@
           decay.style.display = "block"
           var animations=document.querySelectorAll("#decay animate")
           for (var ii=0,animation;animation=animations[ii];ii+=1) {
-            animation.beginElement()
+            if (animation.beginElement){
+              animation.beginElement()
+            } else {
+              decay.style.display = "none"
+            }
           }
 
         setTimeout(function () {
@@ -862,6 +882,16 @@
         }, 1000)
         }
       }
+    }
+  }
+
+  function hrefIsFill(target) {
+    if (target.getAttributeNS) {
+      return (target.getAttributeNS(xlinkNS,"href") === "#fill")
+    } else {
+      // Internet Explorer
+      var item=target.attributes.getNamedItemNS(xlinkNS,"href")
+      return item.nodeValue === "#fill"
     }
   }
 })()
